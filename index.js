@@ -39,14 +39,33 @@ function Airplane(name) {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- function Person() {
-    
+function Person(name,age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+};
+
+Person.prototype.eat = function(someFood){ //the .prototype confuses me weirdly much
+  if(this.stomach.length > 10) {
+    return false;
+  } else {
+    return this.stomach.push (someFood);
+    }
+}
+
+Person.prototype.poop = function(){
+  if(this.stomach.length > 0){
+    return true;
+  } else if(this.stomach.length == 0) {
+    return false;
   }
- 
+}
+
+Person.prototype.toString = function(){
+  return `$(this.name}, $(this.age)`;
+}
  
 
-  
-  
   
   
   /*
@@ -75,10 +94,14 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
- 
+ function Baby(favoriteToy){
+  this.favoriteToy = favoriteToy;
+ }
+ Baby.prototype = Object.create(Person.prototype);
+ Baby.prototype.play = function(){
+   this.favoriteToy = favoriteToy;
+   return `Playing with ${favoriteToy}`
+ }
   
   /* 
     TASK 4
